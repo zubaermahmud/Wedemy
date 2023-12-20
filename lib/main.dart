@@ -31,7 +31,7 @@ class Book {
   String bookAuthor;
   double price;
 
-  Book({this.bookName = '', this.bookAuthor = '', this.price = 0.0});
+  Book({this.bookName = '', this.bookAuthor = '',this.price = 0.0});
 }
 
 class _FirstPageState extends State<FirstPage> {
