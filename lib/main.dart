@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        '/': (context) => FirstPage(),
+        '/': (context) => FirstPage() ,
         '/bookDetails': (context) => SecondPage(),
         '/buyNow': (context) => BuyNow(),
       },
