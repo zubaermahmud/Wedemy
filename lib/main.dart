@@ -46,7 +46,7 @@ class _FirstPageState extends State<FirstPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Book List App - First Page'),
+        title: const Text('List your Book '),
         backgroundColor: Colors.green[800],
         foregroundColor: Colors.white,
         centerTitle: true,
@@ -268,7 +268,7 @@ class SecondPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Book Details - Second Page'),
+        title: const Text('Book Details'),
         backgroundColor: Colors.green[800],
         foregroundColor: Colors.white,
       ),
@@ -352,7 +352,7 @@ class BuyNow extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Payment - Third Page'),
+        title: const Text('Payment '),
         backgroundColor: Colors.green[800],
         foregroundColor: Colors.white,
       ),
@@ -425,34 +425,23 @@ class BuyNow extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Container(
-              height: 50,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: paymentOptions.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text("${paymentOptions[index]}"),
-                    ),
-                  );
-                },
-              ),
-            ),
+
             SizedBox(
               height: 20,
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.popUntil(
-                  context,
-                      (Route route) => route.settings.name == '/',
-                );
-              },
+          ElevatedButton(
+            onPressed: () {
+              Navigator.popUntil(
+                context,
+                    (Route route) => route.settings.name == '/',
+              );
+            },
+            child: Center(
               child: Text("Home"),
             ),
+          )
+
+
           ],
         ),
       ),
