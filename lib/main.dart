@@ -65,7 +65,7 @@ class _MyCalendarState extends State<MyCalendar> {
             shape: BoxShape.circle,
           ),
           selectedDecoration: BoxDecoration(
-            color: Colors.pink,
+            color: Colors.green,
             shape: BoxShape.circle,
           ),
         ),
