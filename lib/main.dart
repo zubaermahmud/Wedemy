@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,61 @@ class MyApp extends StatelessWidget {
         '/': (context) => FirstPage(),
         '/bookDetails': (context) => SecondPage(),
         '/buyNow': (context) => BuyNow(),
+        '/calendar': (context) => MyCalendar (),
       },
+    );
+  }
+}
+class MyCalendar extends StatefulWidget {
+  @override
+  _MyCalendarState createState() => _MyCalendarState();
+}
+
+class _MyCalendarState extends State<MyCalendar> {
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  DateTime _focusedDay = DateTime.now();
+  DateTime _selectedDay = DateTime.now();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+
+        title: Text('MY Calendar '),
+        backgroundColor: Colors.green[800],
+        foregroundColor: Colors.white,
+      ),
+      body: TableCalendar(
+        calendarFormat: _calendarFormat,
+        focusedDay: _focusedDay,
+        firstDay: DateTime(2000),
+        lastDay: DateTime(2050),
+        selectedDayPredicate: (day) {
+
+          return isSameDay(_selectedDay, day);
+        },
+        onDaySelected: (selectedDay, focusedDay) {
+          setState(() {
+            _selectedDay = selectedDay;
+            _focusedDay = focusedDay;
+          });
+        },
+        onFormatChanged: (format) {
+          setState(() {
+            _calendarFormat = format;
+          });
+        },
+        calendarStyle: CalendarStyle(
+          todayDecoration: BoxDecoration(
+            color: Colors.blue,
+            shape: BoxShape.circle,
+          ),
+          selectedDecoration: BoxDecoration(
+            color: Colors.pink,
+            shape: BoxShape.circle,
+          ),
+        ),
+      ),
     );
   }
 }
@@ -343,16 +398,14 @@ class BuyNow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bookDetails = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-
+    bookDetails = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
     Book? selectedBook = bookDetails['bookObject'];
     double selectedBookPrice = bookDetails['price'] ?? 0.0;
 
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Payment '),
+        title: const Text('Payment'),
         backgroundColor: Colors.green[800],
         foregroundColor: Colors.white,
       ),
@@ -393,57 +446,41 @@ class BuyNow extends StatelessWidget {
               height: 40,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('BKash'),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Rocket'),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Visa'),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('MasterCard'),
-                  ),
-                ],
+                children: paymentOptions.map((option) {
+                  return ElevatedButton(
+                    onPressed: () {
+                      // Handle payment option selection
+                    },
+                    child: Text(option),
+                  );
+                }).toList(),
               ),
             ),
             SizedBox(
-              height: 20,
-            ),
-
-            SizedBox(
-              height: 20,
-            ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.popUntil(
-                context,
-                    (Route route) => route.settings.name == '/',
-              );
-            },
-            child: Center(
-              child: Text("Home"),
-            ),
-          )
+              height:35,
 
 
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.popUntil(
+                  context,
+                      (Route<dynamic> route) => route.settings.name == '/',
+                );
+              },
+              child: Center(
+                child: Text("Home"),
+              ),
+            )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/calendar');
+        },
+        tooltip: 'Go to Calendar',
+        child: Icon(Icons.calendar_today),
       ),
     );
   }
