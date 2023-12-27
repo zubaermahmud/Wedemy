@@ -10,10 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => FirstPage() ,
-        '/bookDetails': (context) => SecondPage(),
-        '/buyNow': (context) => BuyNow(),
+        '/': (context) => const FirstPage() ,
+        '/bookDetails': (context) => const SecondPage(),
+        '/buyNow': (context) => const BuyNow(),
       },
     );
   }
@@ -64,12 +65,12 @@ class _FirstPageState extends State<FirstPage> {
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               height: 250,
               child: Form(
                 key: formKey,
                 child: Column(children: [
-                  Divider(
+                  const Divider(
                     height: 30,
                     color: Colors.black,
                     indent: 5,
@@ -99,21 +100,22 @@ class _FirstPageState extends State<FirstPage> {
                       validator: (value) {
                         if (value!.trim().isEmpty) {
                           return 'Please Enter Book Name!';
-                        } else
+                        } else {
                           return null;
+                        }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       decoration: InputDecoration(
-                        icon: Icon(Icons.book),
-                        border: OutlineInputBorder(),
-                        label: Text(
+                        icon: const Icon(Icons.book),
+                        border: const OutlineInputBorder(),
+                        label: const Text(
                           'Enter Book Name',
                           style: TextStyle(fontSize: 20),
                         ),
                         suffixIcon: Visibility(
                           visible: crossVisible,
                           child: IconButton(
-                            icon: Icon(Icons.clear),
+                            icon: const Icon(Icons.clear),
                             onPressed: () {
                               bookController.clear();
                             },
@@ -145,21 +147,22 @@ class _FirstPageState extends State<FirstPage> {
                       validator: (value) {
                         if (value!.trim().isEmpty) {
                           return 'Please enter Author Name!';
-                        } else
+                        } else {
                           return null;
+                        }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       decoration: InputDecoration(
-                        icon: Icon(Icons.person),
-                        border: OutlineInputBorder(),
-                        label: Text(
+                        icon: const Icon(Icons.person),
+                        border: const OutlineInputBorder(),
+                        label: const Text(
                           'Enter Author',
                           style: TextStyle(fontSize: 20),
                         ),
                         suffixIcon: Visibility(
                           visible: crossVisible,
                           child: IconButton(
-                            icon: Icon(Icons.clear),
+                            icon: const Icon(Icons.clear),
                             onPressed: () {
                               authorController.clear();
                             },
@@ -191,21 +194,22 @@ class _FirstPageState extends State<FirstPage> {
                       validator: (value) {
                         if (value!.trim().isEmpty) {
                           return 'Please Enter Book price!';
-                        } else
+                        } else {
                           return null;
+                        }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       decoration: InputDecoration(
-                        icon: Icon(Icons.attach_money),
-                        border: OutlineInputBorder(),
-                        label: Text(
+                        icon: const Icon(Icons.attach_money),
+                        border: const OutlineInputBorder(),
+                        label: const Text(
                           'Enter Book Price',
                           style: TextStyle(fontSize: 20),
                         ),
                         suffixIcon: Visibility(
                           visible: crossVisible,
                           child: IconButton(
-                            icon: Icon(Icons.clear),
+                            icon: const Icon(Icons.clear),
                             onPressed: () {
                               priceController.clear();
                             },
@@ -244,7 +248,7 @@ class _FirstPageState extends State<FirstPage> {
                         }
                       },
 
-                      child: Text("Submit"),
+                      child: const Text("Submit"),
                     ),
                   )
                 ]),
@@ -258,7 +262,15 @@ class _FirstPageState extends State<FirstPage> {
 }
 
 
-class SecondPage extends StatelessWidget {
+class SecondPage extends StatefulWidget {
+
+  const SecondPage({super.key});
+
+  @override
+  State<SecondPage> createState() => _SecondPageState();
+}
+
+class _SecondPageState extends State<SecondPage> {
   Map<String, Book> bookDetails = {};
 
   @override
@@ -277,38 +289,38 @@ class SecondPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Book Name:',
               style: TextStyle(fontSize: 20.0),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
               '${bookDetails['bookObject']?.bookName}',
-              style: TextStyle(fontSize: 30.0),
+              style: const TextStyle(fontSize: 30.0),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
-            Text(
+            const Text(
               'Book Author:',
               style: TextStyle(fontSize: 20.0),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
               '${bookDetails['bookObject']?.bookAuthor}',
-              style: TextStyle(fontSize: 30.0),
+              style: const TextStyle(fontSize: 30.0),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Row(
               children: [
                 ElevatedButton.icon(
-                  icon: Icon(Icons.add_shopping_cart),
+                  icon: const Icon(Icons.add_shopping_cart),
                   onPressed: () {
                     Navigator.pushNamed(context, '/buyNow', arguments: {
                       'bookObject': bookDetails['bookObject'],
@@ -318,11 +330,11 @@ class SecondPage extends StatelessWidget {
                   label: const Text('Buy Now!'),
                 ),
 
-                SizedBox(
+                const SizedBox(
                   width: 40,
                 ),
                 ElevatedButton.icon(
-                  icon: Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -337,8 +349,17 @@ class SecondPage extends StatelessWidget {
   }
 }
 
-class BuyNow extends StatelessWidget {
+class BuyNow extends StatefulWidget {
+
+  const BuyNow({super.key});
+
+  @override
+  State<BuyNow> createState() => _BuyNowState();
+}
+
+class _BuyNowState extends State<BuyNow> {
   Map<String, dynamic> bookDetails = {};
+
   List<String> paymentOptions = ['Bkash', 'Visa', 'Rocket', 'MasterCard'];
 
   @override
@@ -361,35 +382,35 @@ class BuyNow extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Book Name:',
               style: TextStyle(fontSize: 20.0),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
               '${selectedBook?.bookName}  BDT ${selectedBookPrice.toString()}',
-              style: TextStyle(fontSize: 30.0),
+              style: const TextStyle(fontSize: 30.0),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
-            Divider(
+            const Divider(
               height: 30,
               color: Colors.black,
               indent: 5,
               endIndent: 5,
               thickness: 0.7,
             ),
-            Text(
+            const Text(
               'Payment Options',
               style: TextStyle(fontSize: 30.0),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
-            Container(
+            SizedBox(
               height: 40,
               child: ListView(
                 scrollDirection: Axis.horizontal,
@@ -398,21 +419,21 @@ class BuyNow extends StatelessWidget {
                     onPressed: () {},
                     child: const Text('BKash'),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   ElevatedButton(
                     onPressed: () {},
                     child: const Text('Rocket'),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   ElevatedButton(
                     onPressed: () {},
                     child: const Text('Visa'),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   ElevatedButton(
@@ -422,11 +443,11 @@ class BuyNow extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
           ElevatedButton(
@@ -436,7 +457,7 @@ class BuyNow extends StatelessWidget {
                     (Route route) => route.settings.name == '/',
               );
             },
-            child: Center(
+            child: const Center(
               child: Text("Home"),
             ),
           )
@@ -452,12 +473,12 @@ class BuyNow extends StatelessWidget {
 
 class BookCard extends StatelessWidget {
   final Book book;
-  BookCard({required this.book});
+  const BookCard({super.key, required this.book});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(20.0),
+      margin: const EdgeInsets.all(20.0),
       color: Colors.grey[200],
       elevation: 10.0,
       shape: RoundedRectangleBorder(
@@ -470,11 +491,11 @@ class BookCard extends StatelessWidget {
           children: <Widget>[
             Text(
               book.bookName,
-              style: TextStyle(fontSize: 20.0),
+              style: const TextStyle(fontSize: 20.0),
             ),
             Text(
               book.bookAuthor,
-              style: TextStyle(fontSize: 15.0),
+              style: const TextStyle(fontSize: 15.0),
             ),
             TextButton(
                 onPressed: () {
@@ -482,7 +503,7 @@ class BookCard extends StatelessWidget {
                     'bookObject': book,
                   });
                 },
-                child: Text("Details"))
+                child: const Text("Details"))
           ],
         ),
       ),
