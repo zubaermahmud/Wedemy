@@ -367,7 +367,7 @@ class SecondPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, '/buyNow', arguments: {
                       'bookObject': bookDetails['bookObject'],
-                      'price': bookDetails['bookObject']?.price, // Pass the price here
+                      'price': bookDetails['bookObject']?.price,
                     });
                   },
                   label: const Text('Buy Now!'),
@@ -449,7 +449,7 @@ class BuyNow extends StatelessWidget {
                 children: paymentOptions.map((option) {
                   return ElevatedButton(
                     onPressed: () {
-                      // Handle payment option selection
+
                     },
                     child: Text(option),
                   );
