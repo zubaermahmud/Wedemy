@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "839672092545",
+    "project_id": "firestore-crud-2120f",
+    "storage_bucket": "firestore-crud-2120f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839672092545:android:7e89cf47cef72ee2b6ba80",
+        "android_client_info": {
+          "package_name": "com.company.wedemy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1ZhPbpIy7_zy-88zkD7cuA7ZD_8Mccxs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
