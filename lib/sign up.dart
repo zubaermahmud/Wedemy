@@ -1,31 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-void main() {
-  runApp(const SignUpApp());
-}
-
-class SignUpApp extends StatelessWidget {
-  const SignUpApp({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Sign Up Page',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: SignUpPage(),
-    );
-  }
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class SignUpPage extends StatelessWidget {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+class _SignUpPageState extends State<SignUpPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  SignUpPage({super.key});
+  late String _email;
+  late String _password;
+
+  void _createAccount() async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      try {
+        UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+          email: _email,
+          password: _password,
+        );
+        // User successfully created
+        print('User created: ${userCredential.user!.uid}');
+        // You can navigate to another screen after successful sign-up here
+      } catch (e) {
+        // Handle errors here (e.g., show error message)
+        print('Error occurred: $e');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,48 +41,46 @@ class SignUpPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            TextFormField(
-              controller: _nameController,
-              decoration: const InputDecoration(
-                labelText: 'Name',
-                border: OutlineInputBorder(),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(labelText: 'Email'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your email';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _email = value!;
+                },
               ),
-            ),
-            const SizedBox(height: 12.0),
-            TextFormField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'Email',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 16.0),
+              TextFormField(
+                obscureText: true,
+                decoration: const InputDecoration(labelText: 'Password'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your password';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _password = value!;
+                },
               ),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            const SizedBox(height: 12.0),
-            TextFormField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Password',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 24.0),
+              ElevatedButton(
+                onPressed: _createAccount,
+                child: const Text('Sign Up'),
               ),
-              obscureText: true,
-            ),
-            const SizedBox(height: 24.0),
-            ElevatedButton(
-              onPressed: () {
-                // Add your signup logic here using the entered values
-                String name = _nameController.text;
-                String email = _emailController.text;
-                String password = _passwordController.text;
-
-                // Replace with your signup functionality
-              },
-              child: const Text('Sign Up'),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
