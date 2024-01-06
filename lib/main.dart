@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wedemy/splash.dart';
 import 'signup.dart';
 import 'login.dart';
 import 'firebase_options.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage()
+      home: splash()
     );
   }
 }
@@ -72,7 +73,7 @@ class HomePage extends StatelessWidget {
                     minWidth: double.infinity,
                     height: 60,
                     onPressed:(){
-                      Navigator.push(context,MaterialPageRoute( builder: (context) => login()));
+                      Navigator.push(context,MaterialPageRoute( builder: (context) => LoginPage()));
                     },
                     color:Colors.blue[800],
                     shape: RoundedRectangleBorder(
@@ -121,6 +122,25 @@ class HomePage extends StatelessWidget {
                 ],
               )
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+class SimplePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Simple Page'),
+      ),
+      body: Center(
+        child: Text(
+          'Hello, Flutter!',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
