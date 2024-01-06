@@ -35,7 +35,7 @@ class _SignupPageState extends State<SignupPage> {
         // Replace 'YourNextScreen()' with the screen you want to navigate to
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => SimplePage()),
         );
       } catch (e) {
         // Handle errors here (e.g., show error message)
@@ -145,7 +145,7 @@ class _SignupPageState extends State<SignupPage> {
                         // Navigate to login page
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => login(),
+                          MaterialPageRoute(builder: (context) => LoginPage(),
                         ));
                       },
                       child: Text(

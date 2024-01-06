@@ -21,17 +21,19 @@ class _splashState extends State<splash> with
 
   });
 }
+  @override
   void dispose(){
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,overlays: SystemUiOverlay.values);
     super.dispose();
 
   }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         width: double.infinity,
 
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.blue, Colors.purple],
             begin: Alignment.topRight,
@@ -41,15 +43,15 @@ class _splashState extends State<splash> with
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            Container(
+            SizedBox(
               height: 100,
 
               child: Image.asset('images/img_1.png'),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Text(
+            const Text(
               "WeDemy",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -57,10 +59,10 @@ class _splashState extends State<splash> with
                 color: Colors.white,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 250,
             ),
-            Text("Build your Future",style: TextStyle(
+            const Text("Build your Future",style: TextStyle(
               fontSize: 35,
               fontWeight: FontWeight.w600,
             ),)
