@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
+import 'sign up.dart';
+import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'sign up.dart'; // Import the file where SignUpPage is defined
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Firebase Auth Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: SignUpPage(), // Set SignUpPage as the initial route
+      home: SignUpPage()
     );
   }
 }
