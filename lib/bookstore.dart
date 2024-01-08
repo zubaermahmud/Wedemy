@@ -10,6 +10,13 @@ class bookstore extends StatefulWidget {
 class _bookstoreState extends State<bookstore> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('WeDemy'),
+        backgroundColor: Colors.blue[800],
+        foregroundColor: Colors.white,
+        centerTitle: true,
+      ),
+    );
   }
 }
