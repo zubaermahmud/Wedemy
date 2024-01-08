@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wedemy/main.dart';
 import 'login.dart';
+import 'package:wedemy/show.dart';
 
 class SignupPage extends StatefulWidget {
    SignupPage({Key? key});
@@ -35,7 +36,7 @@ class _SignupPageState extends State<SignupPage> {
         // Replace 'YourNextScreen()' with the screen you want to navigate to
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SimplePage()),
+          MaterialPageRoute(builder: (context) => show()),
         );
       } catch (e) {
         // Handle errors here (e.g., show error message)
