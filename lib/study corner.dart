@@ -10,6 +10,13 @@ class studycorner extends StatefulWidget {
 class _studycornerState extends State<studycorner> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('WeDemy'),
+        backgroundColor: Colors.blue[800],
+        foregroundColor: Colors.white,
+        centerTitle: true,
+      ),
+    );
   }
 }
