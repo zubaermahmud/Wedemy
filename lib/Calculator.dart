@@ -10,6 +10,13 @@ class calculator extends StatefulWidget {
 class _calculatorState extends State<calculator> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('WeDemy'),
+        backgroundColor: Colors.blue[800],
+        foregroundColor: Colors.white,
+        centerTitle: true,
+      ),
+    );
   }
 }
