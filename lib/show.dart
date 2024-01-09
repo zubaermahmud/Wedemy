@@ -15,6 +15,7 @@ class show extends StatelessWidget {
         title: Text('WeDemy'),
         backgroundColor: Colors.blue[800],
         foregroundColor: Colors.white,
+        automaticallyImplyLeading: false,
         centerTitle: true,
       ),
       body: SafeArea(
