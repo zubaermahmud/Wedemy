@@ -70,6 +70,7 @@ class _todolistState extends State<todolist> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextField(
+                      onChanged:(value)=> _runFilter(value),
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.all(0),
                         prefixIcon: Icon(
@@ -173,21 +174,7 @@ class _todolistState extends State<todolist> {
       ),
     );
   }
-  void _runFilter(String enteredKeyword) {
-    List<ToDo> results = [];
-    if (enteredKeyword.isEmpty) {
-      results = todosList;
-    } else {
-      results = todosList
-          .where((item) =>
-          item.todoText!.toLowerCase().contains(enteredKeyword.toLowerCase()))
-          .toList();
-    }
 
-    setState(() {
-      _foundToDo = results;
-    });
-  }
 
   void _handleToDoChange(ToDo todo) {
     setState(() {
@@ -210,7 +197,21 @@ class _todolistState extends State<todolist> {
     });
     _todoController.clear();
   }
+  void _runFilter(String enteredKeyword) {
+    List<ToDo> results = [];
+    if (enteredKeyword.isEmpty) {
+      results = todosList;
+    } else {
+      results = todosList
+          .where((item) =>
+          item.todoText!.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .toList();
+    }
 
+    setState(() {
+      _foundToDo = results;
+    });
+  }
 }
 
 
