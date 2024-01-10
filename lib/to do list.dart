@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:wedemy/constants/colors.dart';
 import 'package:wedemy/to do item.dart';
 
+final todosList = ToDo.todoList();
+final _todoController = TextEditingController();
+List<ToDo> _foundToDo = [];
+
+
 class todolist extends StatefulWidget {
   const todolist({super.key});
 
@@ -10,7 +15,12 @@ class todolist extends StatefulWidget {
 }
 
 class _todolistState extends State<todolist> {
-  final todolist = ToDo.todoList();
+  @override
+  void initState() {
+    _foundToDo = todosList;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,11 +100,11 @@ class _todolistState extends State<todolist> {
                           )),
                         ),
                       ),
-                      for (ToDo todoo in todolist)
+                      for (ToDo todoo in _foundToDo.reversed)
                         ToDoItem(
                           todo: todoo,
-                          //onToDoChanged: _handleToDoChange,
-                          //onDeleteItem: _deleteToDoItem,
+                          onToDoChanged: _handleToDoChange,
+                          onDeleteItem: _deleteToDoItem,
                         ),
                     ],
                   ),
@@ -109,11 +119,49 @@ class _todolistState extends State<todolist> {
                     child: Container(
                       margin: EdgeInsets.only(
                         bottom: 20,
-                        right: 20,
-                        left: 20,
+                        right: 15,
+                        left: 15,
                       ),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                       decoration: BoxDecoration(
-
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0.0, 0.0),
+                            blurRadius: 10.0,
+                            spreadRadius: 0.0,
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextField(
+                        controller: _todoController,
+                        decoration: InputDecoration(
+                          hintText: 'Add a new Task',
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                      bottom: 20,
+                      right: 20,
+                    ),
+                    child: ElevatedButton(
+                      child: Text(
+                        '+',
+                        style: TextStyle(fontSize: 40),
+                      ),
+                      onPressed: () {
+                        _addToDoItem(_todoController.text);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blue,
+                        minimumSize: Size(60, 60),
+                        elevation: 10,
                       ),
                     ),
                   ),
@@ -125,4 +173,44 @@ class _todolistState extends State<todolist> {
       ),
     );
   }
+  void _runFilter(String enteredKeyword) {
+    List<ToDo> results = [];
+    if (enteredKeyword.isEmpty) {
+      results = todosList;
+    } else {
+      results = todosList
+          .where((item) =>
+          item.todoText!.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .toList();
+    }
+
+    setState(() {
+      _foundToDo = results;
+    });
+  }
+
+  void _handleToDoChange(ToDo todo) {
+    setState(() {
+      todo.isDone = !todo.isDone;
+    });
+  }
+
+  void _deleteToDoItem(String id) {
+    setState(() {
+      todosList.removeWhere((item) => item.id == id);
+    });
+  }
+
+  void _addToDoItem(String toDo) {
+    setState(() {
+      todosList.add(ToDo(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        todoText: toDo,
+      ));
+    });
+    _todoController.clear();
+  }
+
 }
+
+

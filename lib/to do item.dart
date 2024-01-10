@@ -5,14 +5,14 @@ import 'package:wedemy/constants/colors.dart';
 
 class ToDoItem extends StatelessWidget {
   final ToDo todo;
-  //final onToDoChanged;
-  //final onDeleteItem;
+  final onToDoChanged;
+  final onDeleteItem;
 
   const ToDoItem({
     Key? key,
     required this.todo,
-   // required this.onToDoChanged,
-    //required this.onDeleteItem,
+    required this.onToDoChanged,
+    required this.onDeleteItem,
   }) : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class ToDoItem extends StatelessWidget {
       child: ListTile(
         onTap: () {
           // print('Clicked on Todo Item.');
-          //onToDoChanged(todo);
+          onToDoChanged(todo);
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
@@ -56,7 +56,7 @@ class ToDoItem extends StatelessWidget {
             icon: Icon(Icons.delete),
             onPressed: () {
               // print('Clicked on delete icon');
-             // onDeleteItem(todo.id);
+              onDeleteItem(todo.id);
             },
           ),
         ),
@@ -64,7 +64,6 @@ class ToDoItem extends StatelessWidget {
     );
   }
 }
-
 class ToDo {
   String? id;
   String? todoText;
