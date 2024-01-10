@@ -4,6 +4,7 @@ import 'package:wedemy/bookstore.dart';
 import 'package:wedemy/Calculator.dart';
 import 'package:wedemy/study corner.dart';
 import 'package:wedemy/to do list.dart';
+import 'package:wedemy/login.dart';
 
 class show extends StatelessWidget {
   const show({super.key});
@@ -33,10 +34,19 @@ class show extends StatelessWidget {
                     color: Colors.blue,
                     size: 40,
                   ),
-                  Icon(
-                    Icons.account_circle,
-                    color: Colors.blue,
-                    size: 50,
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(
+                          Icons.account_circle,
+                          size: 45,
+                        ),
+                        color: Colors.blue,
+                        onPressed: () {
+                          _showPopupMenu(context);
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -318,5 +328,29 @@ class show extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _showPopupMenu(BuildContext context) async {
+    final result = await showMenu(
+      context: context,
+      position:
+          RelativeRect.fromLTRB(50, 100, 0, 0), // Adjust position accordingly
+      items: [
+        PopupMenuItem(
+          child: const Text('Logout'),
+          value: 'logout',
+        ),
+      ],
+      elevation: 8.0,
+    );
+
+    if (result == 'logout') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginPage(),
+        ),
+      );
+    }
   }
 }
