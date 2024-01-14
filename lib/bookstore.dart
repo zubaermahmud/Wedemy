@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:wedemy/constants/colors.dart';
+import 'package:wedemy/constants/Theme.dart';
 
 class bookstore extends StatefulWidget {
   const bookstore({super.key});
@@ -68,10 +70,91 @@ class _bookstoreState extends State<bookstore> {
         return Container(
           child: Column(
             children: [
-              Text(
-                "1 nice",
-                style: TextStyle(
-                  color: Colors.red,
+              Container(
+                padding: EdgeInsets.all(10),
+                color: Theme.of(context).colorScheme.primary,
+                height: 300,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Image(image: AssetImage('images/dashboard.png')),
+                              Text(
+                                "E-book",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium
+                                    ?.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .background),
+                              ),
+                              Icon(
+                                Icons.account_circle,
+                                size: 45,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "Hello.students.",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("Welcome to the domain of knowledge")
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Theme.of(context).colorScheme.background,
+                            ),
+                            child: Row(
+                              children: [
+                                SizedBox(width: 20,),
+                                Icon(
+                                  Icons.search_off,
+
+
+                                ),
+                                Expanded(
+
+                                  child: TextField(
+
+                                    decoration: InputDecoration(
+                                      hintText: 'search',
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                      )
+                                    ),
+
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -99,7 +182,7 @@ class _bookstoreState extends State<bookstore> {
         return Container(
           child: Column(
             children: [
-              Text("3 very good"),
+              Text("4 very good"),
             ],
           ),
         );
