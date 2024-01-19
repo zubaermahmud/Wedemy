@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:wedemy/constants/colors.dart';
 import 'package:wedemy/constants/Theme.dart';
+import 'package:wedemy/data.dart';
+import 'package:wedemy/bookmodel.dart';
+import 'package:wedemy/category.dart';
+import 'package:wedemy/bookcard.dart';
 
 class bookstore extends StatefulWidget {
   const bookstore({super.key});
@@ -16,6 +20,7 @@ class _bookstoreState extends State<bookstore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('WeDemy'),
         backgroundColor: Colors.blue[800],
@@ -67,99 +72,7 @@ class _bookstoreState extends State<bookstore> {
   Widget _buildPage(int index) {
     switch (index) {
       case 0:
-        return Container(
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.all(10),
-                color: Theme.of(context).colorScheme.primary,
-                height: 300,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Image(image: AssetImage('images/dashboard.png')),
-                              Text(
-                                "E-book",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineMedium
-                                    ?.copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .background),
-                              ),
-                              Icon(
-                                Icons.account_circle,
-                                size: 45,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Hello.students.",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text("Welcome to the domain of knowledge")
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Theme.of(context).colorScheme.background,
-                            ),
-                            child: Row(
-                              children: [
-                                SizedBox(width: 20,),
-                                Icon(
-                                  Icons.search_off,
-
-
-                                ),
-                                Expanded(
-
-                                  child: TextField(
-
-                                    decoration: InputDecoration(
-                                      hintText: 'search',
-                                      border: OutlineInputBorder(
-                                        borderSide: BorderSide.none,
-                                      )
-                                    ),
-
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
+        return HomeWidget();
       case 1:
         return Container(
           child: Column(
@@ -169,7 +82,6 @@ class _bookstoreState extends State<bookstore> {
           ),
         );
       case 2:
-        // Add your code for the 'Favorite' tab
         return Container(
           child: Column(
             children: [
@@ -178,7 +90,6 @@ class _bookstoreState extends State<bookstore> {
           ),
         );
       case 3:
-        // Add your code for the 'Orders' tab
         return Container(
           child: Column(
             children: [
@@ -186,7 +97,6 @@ class _bookstoreState extends State<bookstore> {
             ],
           ),
         );
-
       default:
         return Container(
           child: Column(
@@ -201,5 +111,152 @@ class _bookstoreState extends State<bookstore> {
           ),
         );
     }
+  }
+}
+
+class HomeWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            height: 330,
+            color: Theme.of(context).colorScheme.primary,
+            padding: EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image(image: AssetImage('images/dashboard.png')),
+                    Text(
+                      "E-book",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineMedium
+                          ?.copyWith(
+                              color: Theme.of(context).colorScheme.background),
+                    ),
+                    Icon(
+                      Icons.account_circle,
+                      size: 45,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "Hello, students.",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  "Welcome to the domain of knowledge",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Theme.of(context).colorScheme.background,
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(width: 20),
+                      Icon(
+                        Icons.search,
+                      ),
+                      Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'search',
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  "Topics",
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.background),
+                ),
+                SizedBox(height: 10),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: categoryData
+                        .map(
+                          (e) => CategoryWidget(
+                              iconPath: e["icon"]!, btnName: e["lebel"]!),
+                        )
+                        .toList(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      "Trending",
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                  ],
+                ),
+      SizedBox(height: 10),
+      SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: List.generate(
+            10,
+                (index) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: 150,
+                height: 200,
+                color: Colors.green,
+                child: Center(
+                  child: Image.asset("images/img.png")
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+                SizedBox(height: 10),
+                Row(
+                  children: [
+                    Text(
+                      "Your Interests",
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                  ],
+                ),
+                // Add your widget or logic for displaying user interests here
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
