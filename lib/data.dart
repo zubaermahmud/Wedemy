@@ -1,4 +1,5 @@
 import 'package:wedemy/bookmodel.dart';
+import 'package:flutter/material.dart';
 
 var categoryData = [
 
@@ -30,7 +31,7 @@ var bookData = [
       aboutAuthor: " i have written this book",
       audioLen: "20",
       author: "labib",
-      coverUrl: "images/heart.png",
+      coverUrl: "images/boundraries.jpg",
       rating: "4.2",
       category: "Documentary",
       numberofRating: "10,",
@@ -47,7 +48,7 @@ var bookData = [
       aboutAuthor: "i have written this book",
       audioLen: "20",
       author: "tasfia",
-      coverUrl: "images/heart.png",
+      coverUrl: "images/daily stoic.jpg",
       rating: "4.2",
       category: "Documentary",
       price: 100,
@@ -64,7 +65,7 @@ var bookData = [
       aboutAuthor: " i have written this book",
       audioLen: "20",
       author: "Farhan",
-      coverUrl: "images/heart.png",
+      coverUrl: "images/You are not so smart.jpg",
       rating: "4.2",
       category: "Documentary",
       numberofRating: "10,",
@@ -81,7 +82,7 @@ var bookData = [
     aboutAuthor: "i have written this book",
     audioLen: "20",
     author: "Labib",
-    coverUrl: "images/heart.png",
+    coverUrl: "images/When the moon split.jpg",
     rating: "4.2",
     category: "Documentary",
     price: 100,

@@ -6,9 +6,9 @@ class BookCard extends StatelessWidget {
   final VoidCallback ontap;
   const BookCard(
       {super.key,
-      required this.coverUrl,
-      required this.title,
-      required this.ontap});
+        required this.coverUrl,
+        required this.title,
+        required this.ontap});
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +35,10 @@ class BookCard extends StatelessWidget {
                   ],
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    coverUrl,
-                    //width: 120,
-                    fit: BoxFit.cover,
-
-                  ),
-                ),
+                  borderRadius:BorderRadius.circular(15),
+                  child: Image.asset(coverUrl
+                    ,width: 120,),
+                )
               ),
               SizedBox(height: 10),
               Text(

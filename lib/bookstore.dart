@@ -31,29 +31,30 @@ class _bookstoreState extends State<bookstore> {
       bottomNavigationBar: Container(
         color: Colors.blueAccent,
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(7.0),
           child: SafeArea(
             child: GNav(
               backgroundColor: Colors.blueAccent,
               activeColor: Colors.white,
               tabBackgroundColor: Colors.indigoAccent.shade400,
-              gap: 5,
+              gap: 4,
               tabs: [
                 GButton(
                   icon: Icons.home,
-                  text: ' Home',
+                  iconSize: 20,
+                  text: 'Home',
                 ),
                 GButton(
                   icon: Icons.shopping_cart,
-                  text: ' Cart',
+                  text: 'Cart',
                 ),
                 GButton(
                   icon: Icons.favorite_border,
-                  text: ' Favorite',
+                  text: 'Like',
                 ),
                 GButton(
                   icon: Icons.add_chart_sharp,
-                  text: ' Orders',
+                  text: 'Order',
                 ),
               ],
               selectedIndex: _selectedIndex,
@@ -135,11 +136,9 @@ class HomeWidget extends StatelessWidget {
                     Image(image: AssetImage('images/dashboard.png')),
                     Text(
                       "E-book",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium
-                          ?.copyWith(
-                              color: Theme.of(context).colorScheme.background),
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.background,
+                      ),
                     ),
                     Icon(
                       Icons.account_circle,
@@ -192,7 +191,8 @@ class HomeWidget extends StatelessWidget {
                 Text(
                   "Topics",
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.background),
+                    color: Theme.of(context).colorScheme.background,
+                  ),
                 ),
                 SizedBox(height: 10),
                 SingleChildScrollView(
@@ -201,8 +201,10 @@ class HomeWidget extends StatelessWidget {
                     children: categoryData
                         .map(
                           (e) => CategoryWidget(
-                              iconPath: e["icon"]!, btnName: e["lebel"]!),
-                        )
+                        iconPath: e["icon"]!,
+                        btnName: e["lebel"]!,
+                      ),
+                    )
                         .toList(),
                   ),
                 ),
@@ -222,26 +224,20 @@ class HomeWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-      SizedBox(height: 10),
-      SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: List.generate(
-            10,
-                (index) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                width: 150,
-                height: 200,
-                color: Colors.green,
-                child: Center(
-                  child: Image.asset("images/img.png")
+                SizedBox(height: 10),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: bookData.map(
+                          (e) => BookCard(
+
+                            coverUrl: e.coverUrl!,
+                            title: e.title!,
+                            ontap: (){},
+                      ),
+                    ).toList(),
+                  ),
                 ),
-              ),
-            ),
-          ),
-        ),
-      ),
                 SizedBox(height: 10),
                 Row(
                   children: [
