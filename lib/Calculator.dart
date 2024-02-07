@@ -185,6 +185,6 @@ class ResultPage extends StatelessWidget {
       totalCreditHours += credit;
     }
 
-    return totalQualityPoints / totalCreditHours;
+    return totalQualityPoints /   totalCreditHours;
   }
 }
