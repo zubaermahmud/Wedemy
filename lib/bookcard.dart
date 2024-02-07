@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wedemy/data.dart';
+import 'package:wedemy/bookmodel.dart';
 
 class BookCard extends StatelessWidget {
   final String coverUrl;

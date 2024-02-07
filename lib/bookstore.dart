@@ -6,6 +6,7 @@ import 'package:wedemy/data.dart';
 import 'package:wedemy/bookmodel.dart';
 import 'package:wedemy/category.dart';
 import 'package:wedemy/bookcard.dart';
+import 'package:wedemy/booktile.dart';
 
 class bookstore extends StatefulWidget {
   const bookstore({super.key});
@@ -49,13 +50,14 @@ class _bookstoreState extends State<bookstore> {
                   text: 'Cart',
                 ),
                 GButton(
+                  icon: Icons.add,
+                  text: 'Add ',
+                ),
+                GButton(
                   icon: Icons.favorite_border,
                   text: 'Like',
                 ),
-                GButton(
-                  icon: Icons.add_chart_sharp,
-                  text: 'Order',
-                ),
+
               ],
               selectedIndex: _selectedIndex,
               onTabChange: (index) {
@@ -230,24 +232,52 @@ class HomeWidget extends StatelessWidget {
                   child: Row(
                     children: bookData.map(
                           (e) => BookCard(
-
-                            coverUrl: e.coverUrl!,
-                            title: e.title!,
-                            ontap: (){},
+                        coverUrl: e.coverUrl!,
+                        title: e.title!,
+                        ontap: () {},
                       ),
                     ).toList(),
                   ),
                 ),
                 SizedBox(height: 10),
-                Row(
+
+                SizedBox(height: 30),
+                Column(
                   children: [
-                    Text(
-                      "Your Interests",
-                      style: Theme.of(context).textTheme.labelMedium,
+                    Container(
+                      color: Theme.of(context).primaryColor.withOpacity(.2),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Your Interests",
+
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+
+
+
+                          ),
+                        ],
+                      ),
                     ),
+
+                    SizedBox(height: 30),
+                    Column(
+                        children: bookData.map((e) => BookTile(
+                            title: e.title!,
+                            coverUrl: e.coverUrl!,
+                            author: e.author!,
+                            price: e.price!,
+                            rating: e.rating!,
+                            numberofRating: e.numberofRating!,
+                            ontap: () {})).toList()
+                    ),
+
+
+
                   ],
                 ),
-                // Add your widget or logic for displaying user interests here
               ],
             ),
           ),
@@ -256,3 +286,5 @@ class HomeWidget extends StatelessWidget {
     );
   }
 }
+
+
