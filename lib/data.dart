@@ -25,7 +25,7 @@ var bookData = [
   BookModel(
       id: "1",
       title:
-      "Boundraties and thi is my first book and and thi is my first book and ",
+      "Boundraties  ",
       description:
       "n publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum",
       aboutAuthor: " i have written this book",
@@ -34,7 +34,7 @@ var bookData = [
       coverUrl: "images/boundraries.jpg",
       rating: "4.2",
       category: "Documentary",
-      numberofRating: "10,",
+      numberofRating: 6,
       price: 100,
       pages: 234,
       language: "ENG",
@@ -52,7 +52,7 @@ var bookData = [
       rating: "4.2",
       category: "Documentary",
       price: 100,
-      numberofRating: "10,",
+      numberofRating: 10,
       language: "ENG",
       pages: 234,
       bookurl:
@@ -68,7 +68,7 @@ var bookData = [
       coverUrl: "images/You are not so smart.jpg",
       rating: "4.2",
       category: "Documentary",
-      numberofRating: "10,",
+      numberofRating: 6,
       price: 100,
       language: "ENG",
       pages: 234,
@@ -88,7 +88,7 @@ var bookData = [
     price: 100,
     pages: 234,
     language: "ENG",
-    numberofRating: "10,",
+    numberofRating: 9,
     bookurl:
     "https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf",
   )
