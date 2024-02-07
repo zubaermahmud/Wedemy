@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wedemy/Calender.dart';
 import 'package:wedemy/bookstore.dart';
 import 'package:wedemy/Calculator.dart';
+import 'Message.dart';
 import 'package:wedemy/study corner.dart';
 import 'package:wedemy/to do list.dart';
 import 'package:wedemy/login.dart';
@@ -275,7 +276,7 @@ class show extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => studycorner(),
+                            builder: (context) => MessagePage(),
                           ),
                         );
                       },
