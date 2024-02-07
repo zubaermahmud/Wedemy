@@ -7,6 +7,8 @@ import 'package:wedemy/bookmodel.dart';
 import 'package:wedemy/category.dart';
 import 'package:wedemy/bookcard.dart';
 import 'package:wedemy/booktile.dart';
+import 'package:wedemy/BookDetails.dart';
+import 'package:get/get.dart';
 
 class bookstore extends StatefulWidget {
   const bookstore({super.key});
@@ -234,7 +236,13 @@ class HomeWidget extends StatelessWidget {
                           (e) => BookCard(
                         coverUrl: e.coverUrl!,
                         title: e.title!,
-                        ontap: () {},
+                        ontap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(
+                                  builder: (context)=>BookDetails(),
+                          ),
+                          );
+                        },
                       ),
                     ).toList(),
                   ),
@@ -271,7 +279,9 @@ class HomeWidget extends StatelessWidget {
                             price: e.price!,
                             rating: e.rating!,
                             numberofRating: e.numberofRating!,
-                            ontap: () {})).toList()
+                            ontap: () {
+
+                            })).toList()
                     ),
 
 
