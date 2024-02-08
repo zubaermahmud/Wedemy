@@ -42,24 +42,17 @@ class _bookstoreState extends State<bookstore> {
               backgroundColor: Colors.blueAccent,
               activeColor: Colors.white,
               tabBackgroundColor: Colors.indigoAccent.shade400,
-              gap: 4,
+              gap: 2,
               tabs: [
                 GButton(
                   icon: Icons.home,
                   iconSize: 20,
                   text: 'Home',
                 ),
-                GButton(
-                  icon: Icons.shopping_cart,
-                  text: 'Cart',
-                ),
+
                 GButton(
                   icon: Icons.add,
                   text: 'Add ',
-                ),
-                GButton(
-                  icon: Icons.favorite_border,
-                  text: 'Like',
                 ),
               ],
               selectedIndex: _selectedIndex,
@@ -79,25 +72,11 @@ class _bookstoreState extends State<bookstore> {
     switch (index) {
       case 0:
         return HomeWidget();
+
       case 1:
-        return Container(
-          child: Column(
-            children: [
-              Text("2 good"),
-            ],
-          ),
-        );
-      case 2:
         return AddBook();
 
-      case 3:
-        return Container(
-          child: Column(
-            children: [
-              Text("4 very good"),
-            ],
-          ),
-        );
+
       default:
         return Container(
           child: Column(
@@ -379,8 +358,47 @@ class HomeWidget extends StatelessWidget {
                         ),
                         child: InkWell(
                           onTap: () {
-                            // Add functionality to add the book
-                            print("Adding book...");
+                            // Gather data from text fields
+                            String title = titleController.text;
+                            String author = authorController.text;
+                            int totalPages = int.parse(totalPagesController.text);
+                            String language = languageController.text;
+                            int price = int.parse(priceController.text);
+                            String audioLength = audioLengthController.text;
+                            String description = descriptionController.text;
+
+                            // Create a new BookModel object
+                            BookModel newBook = BookModel(
+                              id: (bookData.length + 1).toString(), // Generate unique ID
+                              title: title,
+                              author: author,
+                              pages: totalPages,
+                              language: language,
+                              price: price,
+                              audioLen: audioLength,
+                              description: description,
+                              coverUrl: "", // Set cover URL if available
+                              rating: "0", // Set initial rating
+                              category: "", // Set category if available
+                              numberofRating: 0, // Set initial number of ratings
+                              bookurl: "", // Set book URL if available
+                              aboutAuthor: "", // Set about author if available
+                            );
+
+                            // Add the new book to the bookData list
+                            bookData.add(newBook);
+
+                            // Clear text fields after adding the book
+                            titleController.clear();
+                            authorController.clear();
+                            totalPagesController.clear();
+                            languageController.clear();
+                            priceController.clear();
+                            audioLengthController.clear();
+                            descriptionController.clear();
+
+                            // Print message
+                            print("Book added: $newBook");
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
