@@ -237,11 +237,13 @@ class HomeWidget extends StatelessWidget {
                         coverUrl: e.coverUrl!,
                         title: e.title!,
                         ontap: () {
+
                           Navigator.push(context,
                               MaterialPageRoute(
-                                  builder: (context)=>BookDetails(),
+                                  builder: (context)=>BookDetails(book:e),
                           ),
                           );
+
                         },
                       ),
                     ).toList(),
