@@ -88,7 +88,7 @@ class _bookstoreState extends State<bookstore> {
           ),
         );
       case 2:
-        return addbook();
+        return AddBook();
 
       case 3:
         return Container(
@@ -285,111 +285,128 @@ class HomeWidget extends StatelessWidget {
       ),
     );
   }
-}
-class addbook extends StatelessWidget {
-  const addbook({Key? key}) : super(key: key);
-@override
-Widget build(BuildContext context) {
-  TextEditingController controller = TextEditingController();
-  return Scaffold(
-    resizeToAvoidBottomInset: false,
-    body: SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            color: Colors.blueGrey,
-            height: 400,
-            // Add image or image field here
-          ),
-          SizedBox(height: 20),
-          Container(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              children: [
-                MyTextFormField(
-                  hintText: "Book title",
-                  icon: Icons.book,
-                  controller: controller,
-                ),
-                SizedBox(height: 20),
-                MyTextFormField(
-                  hintText: "Author",
-                  icon: Icons.account_circle,
-                  controller: controller,
-                ),
-                SizedBox(height: 20),
-                MyTextFormField(
-                  hintText: "Total page",
-                  icon: Icons.add_chart_sharp,
-                  controller: controller,
-                ),
-                SizedBox(height: 20),
-                MyTextFormField(
-                  hintText: "Language",
-                  icon: Icons.abc_outlined,
-                  controller: controller,
-                ),
-                SizedBox(height: 20),
-                MyTextFormField(
-                  hintText: "Price",
-                  icon: Icons.account_balance_wallet_rounded,
-                  controller: controller,
-                ),
-                SizedBox(height: 20),
-                MyTextFormField(
-                  hintText: "Audio length",
-                  icon: Icons.book,
-                  controller: controller,
-                ),
-                SizedBox(height: 10),
-                MultiLineTextField(
-                  hintText: "Description",
-                  controller: controller,
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Container(
+}class AddBook extends StatelessWidget {
+  const AddBook({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    TextEditingController titleController = TextEditingController();
+    TextEditingController authorController = TextEditingController();
+    TextEditingController totalPagesController = TextEditingController();
+    TextEditingController languageController = TextEditingController();
+    TextEditingController priceController = TextEditingController();
+    TextEditingController audioLengthController = TextEditingController();
+    TextEditingController descriptionController = TextEditingController();
+
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              color: Colors.blueGrey,
+              height: 400,
+              // Add image or image field here
+            ),
+            SizedBox(height: 20),
+            Container(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "Book title",
+                      icon: Icon(Icons.book),
+                    ),
+                    controller: titleController,
+                  ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "Author",
+                      icon: Icon(Icons.account_circle),
+                    ),
+                    controller: authorController,
+                  ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "Total page",
+                      icon: Icon(Icons.add_chart_sharp),
+                    ),
+                    controller: totalPagesController,
+                  ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "Language",
+                      icon: Icon(Icons.abc_outlined),
+                    ),
+                    controller: languageController,
+                  ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "Price",
+                      icon: Icon(Icons.account_balance_wallet_rounded),
+                    ),
+                    controller: priceController,
+                  ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "Audio length",
+                      icon: Icon(Icons.audiotrack),
+                    ),
+                    controller: audioLengthController,
+                  ),
+                  SizedBox(height: 10),
+                  TextField(
+                    maxLines: null,
+                    decoration: InputDecoration(
+                      hintText: "Description",
+                    ),
+                    controller: descriptionController,
+                  ),
+                  SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
                         height: 40,
                         decoration: BoxDecoration(
                           color: Colors.blue,
                         ),
                         child: InkWell(
                           onTap: () {
-                            // Add your onTap functionality here
+                            // Add functionality to add the book
+                            print("Adding book...");
                           },
-                          child: Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    "Add",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Add",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
                                   ),
                                 ),
-                               
-                            
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 }

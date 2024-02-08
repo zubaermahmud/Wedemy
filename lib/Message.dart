@@ -91,6 +91,7 @@ class _ChatScreenState extends State<MessagePage> {
                     return ListTile(
                       title: Text(data['text']),
                       subtitle: Text(data['senderId']),
+
                     );
                   }).toList(),
                 );
