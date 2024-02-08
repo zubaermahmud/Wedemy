@@ -4,16 +4,12 @@ import 'signup.dart';
 import 'login.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -21,9 +17,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: splash()
+      home: const splash()
     );
   }
 }
@@ -33,7 +29,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('WeDemy'),
+        title: const Text('WeDemy'),
         backgroundColor: Colors.blue[800],
         foregroundColor: Colors.white,
         centerTitle: true,
@@ -41,12 +37,12 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text(
+              const Text(
                 "Welcome Students",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -54,7 +50,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
 
-              Text(
+              const Text(
                 "Your future depends on You",
                 style: TextStyle(
                   fontSize: 18,
@@ -63,7 +59,7 @@ class HomePage extends StatelessWidget {
               ),
               Container(
                   height: MediaQuery.of(context).size.height / 3,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       image: DecorationImage(image: AssetImage("images/img.png")
                       )
                   )
@@ -78,13 +74,13 @@ class HomePage extends StatelessWidget {
                     },
                     color:Colors.blue[800],
                     shape: RoundedRectangleBorder(
-                        side:BorderSide(
+                        side:const BorderSide(
                           color:Colors.blue,
                         ),
                         borderRadius:BorderRadius.circular(50)
 
                     ),
-                    child:Text(
+                    child:const Text(
                       "Login",
                       style: TextStyle(
                         fontSize: 25,
@@ -106,13 +102,13 @@ class HomePage extends StatelessWidget {
                     },
                     color:Colors.blue[800],
                     shape: RoundedRectangleBorder(
-                        side:BorderSide(
+                        side:const BorderSide(
                           color:Colors.blue,
                         ),
                         borderRadius:BorderRadius.circular(50)
 
                     ),
-                    child:Text(
+                    child:const Text(
                       "Sign Up",
                       style: TextStyle(
                         fontSize: 25,
@@ -134,9 +130,9 @@ class SimplePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Simple Page'),
+        title: const Text('Simple Page'),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'Hello, Flutter!',
           style: TextStyle(

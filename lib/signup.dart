@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wedemy/main.dart';
@@ -5,7 +6,7 @@ import 'login.dart';
 import 'package:wedemy/show.dart';
 
 class SignupPage extends StatefulWidget {
-   SignupPage({Key? key});
+  SignupPage({Key? key});
 
   @override
   State<SignupPage> createState() => _SignupPageState();
@@ -13,12 +14,12 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
+  final FirebaseFirestore _firestore= FirebaseFirestore.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 
   late String _email;
-
+  late String _user;
   late String _password;
 
   Future<void> _createAccount(BuildContext context) async {
@@ -27,9 +28,13 @@ class _SignupPageState extends State<SignupPage> {
       try {
         UserCredential userCredential = await _auth
             .createUserWithEmailAndPassword(
-              email: _email,
-              password: _password,
-            );
+          email: _email,
+          password: _password,
+        );
+        await _firestore.collection('users').doc(userCredential.user!.uid).set({
+          'username': _user,
+          'email': _email
+        });
         // User successfully created
         print('User created: ${userCredential.user!.uid}');
         // Navigate to another screen after successful sign-up
@@ -94,6 +99,7 @@ class _SignupPageState extends State<SignupPage> {
                 Column(
                   children: <Widget>[
                     inputFile(label: "Username", onSave: (value) {
+                      _user=value;
                     }),
                     inputFile(label: "Email", onSave: (value) {
                       _email = value;
@@ -145,9 +151,9 @@ class _SignupPageState extends State<SignupPage> {
                       onTap: () {
                         // Navigate to login page
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LoginPage(),
-                        ));
+                            context,
+                            MaterialPageRoute(builder: (context) => LoginPage(),
+                            ));
                       },
                       child: Text(
                         "Log in",
@@ -209,5 +215,3 @@ Widget inputFile({required String label, bool obscureText = false, void Function
     ],
   );
 }
-
-

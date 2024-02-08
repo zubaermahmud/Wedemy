@@ -1,6 +1,42 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+class CurrentUser {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<String?> getCurrentUserId() async {
+    // Get the current user's ID from Firebase Authentication
+    User? user = _auth.currentUser;
+    if (user != null) {
+      return user.uid;
+    } else {
+      return null; // User is not authenticated
+    }
+  }
+
+  Future<String?> getCurrentUserUsername() async {
+    try {
+      // Get the current user's ID
+      String? userId = await getCurrentUserId();
+      if (userId != null) {
+        // Query Firestore to get the user document by user ID
+        DocumentSnapshot userSnapshot =
+        await _firestore.collection('users').doc(userId).get();
+
+        // Get the username from the user document
+        return userSnapshot['username'] as String?;
+      } else {
+        return null; // User is not authenticated
+      }
+    } catch (e) {
+      print('Error getting current user username: $e');
+      return null;
+    }
+  }
+}
 
 class MessagePage extends StatefulWidget {
   const MessagePage({Key? key}) : super(key: key);
@@ -12,12 +48,17 @@ class MessagePage extends StatefulWidget {
 class _ChatScreenState extends State<MessagePage> {
   final TextEditingController _textController = TextEditingController();
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final CurrentUser _currentUser = CurrentUser(); // Instantiate CurrentUser
+
   void _sendMessage(String messageText, String senderId) async {
-    await firestore.collection('messages').add({
-      'text': messageText,
-      'senderId': senderId,
-      'timestamp': DateTime.now(),
-    });
+    String? currentUsername = await _currentUser.getCurrentUserUsername(); // Get current username
+    if (currentUsername != null) {
+      await firestore.collection('messages').add({
+        'text': messageText,
+        'senderId': currentUsername, // Save current username as senderId
+        'timestamp': DateTime.now(),
+      });
+    }
   }
 
   Stream<QuerySnapshot> _getMessages() {
@@ -28,7 +69,7 @@ class _ChatScreenState extends State<MessagePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Chat'),
+        title: Text('Global Chat'),
       ),
       body: Column(
         children: <Widget>[
