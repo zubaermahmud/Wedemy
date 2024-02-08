@@ -28,7 +28,7 @@ class _ChatScreenState extends State<MessagePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Chat'),
+        title: Text('Global Chat'),
       ),
       body: Column(
         children: <Widget>[
