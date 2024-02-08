@@ -7,7 +7,7 @@ import 'package:wedemy/study corner.dart';
 import 'package:wedemy/to do list.dart';
 import 'package:wedemy/login.dart';
 import 'package:wedemy/Calculator.dart';
-
+import 'package:wedemy/profile.dart';
 
 class show extends StatelessWidget {
   const show({super.key});
@@ -343,6 +343,10 @@ class show extends StatelessWidget {
           child: const Text('Logout'),
           value: 'logout',
         ),
+        PopupMenuItem(
+          child: const Text('profile'),
+          value: 'profile',
+        ),
       ],
       elevation: 8.0,
     );
@@ -355,5 +359,14 @@ class show extends StatelessWidget {
         ),
       );
     }
+    if (result == 'profile') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProfilePage(),
+        ),
+      );
+    }
+
   }
 }
