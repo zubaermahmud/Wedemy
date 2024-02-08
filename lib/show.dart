@@ -6,6 +6,9 @@ import 'Message.dart';
 import 'package:wedemy/study corner.dart';
 import 'package:wedemy/to do list.dart';
 import 'package:wedemy/login.dart';
+import 'package:wedemy/Calculator.dart';
+
+
 
 class show extends StatelessWidget {
   const show({super.key});
@@ -176,7 +179,11 @@ class show extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
+
                             builder: (context) => calculator(),
+
+
+
                           ),
                         );
                       },
@@ -335,7 +342,7 @@ class show extends StatelessWidget {
     final result = await showMenu(
       context: context,
       position:
-          RelativeRect.fromLTRB(50, 100, 0, 0), // Adjust position accordingly
+          RelativeRect.fromLTRB(50, 100, 0, 0),
       items: [
         PopupMenuItem(
           child: const Text('Logout'),

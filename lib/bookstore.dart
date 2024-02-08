@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:wedemy/textfield.dart';
 import 'package:wedemy/constants/colors.dart';
 import 'package:wedemy/constants/Theme.dart';
 import 'package:wedemy/data.dart';
@@ -9,6 +10,7 @@ import 'package:wedemy/bookcard.dart';
 import 'package:wedemy/booktile.dart';
 import 'package:wedemy/BookDetails.dart';
 import 'package:get/get.dart';
+import 'package:wedemy/multitext.dart';
 
 class bookstore extends StatefulWidget {
   const bookstore({super.key});
@@ -59,7 +61,6 @@ class _bookstoreState extends State<bookstore> {
                   icon: Icons.favorite_border,
                   text: 'Like',
                 ),
-
               ],
               selectedIndex: _selectedIndex,
               onTabChange: (index) {
@@ -87,13 +88,8 @@ class _bookstoreState extends State<bookstore> {
           ),
         );
       case 2:
-        return Container(
-          child: Column(
-            children: [
-              Text("3 nice good"),
-            ],
-          ),
-        );
+        return addbook();
+
       case 3:
         return Container(
           child: Column(
@@ -140,9 +136,10 @@ class HomeWidget extends StatelessWidget {
                     Image(image: AssetImage('images/dashboard.png')),
                     Text(
                       "E-book",
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.background,
-                      ),
+                      style:
+                          Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                color: Theme.of(context).colorScheme.background,
+                              ),
                     ),
                     Icon(
                       Icons.account_circle,
@@ -195,8 +192,8 @@ class HomeWidget extends StatelessWidget {
                 Text(
                   "Topics",
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.background,
-                  ),
+                        color: Theme.of(context).colorScheme.background,
+                      ),
                 ),
                 SizedBox(height: 10),
                 SingleChildScrollView(
@@ -205,10 +202,10 @@ class HomeWidget extends StatelessWidget {
                     children: categoryData
                         .map(
                           (e) => CategoryWidget(
-                        iconPath: e["icon"]!,
-                        btnName: e["lebel"]!,
-                      ),
-                    )
+                            iconPath: e["icon"]!,
+                            btnName: e["lebel"]!,
+                          ),
+                        )
                         .toList(),
                   ),
                 ),
@@ -232,25 +229,25 @@ class HomeWidget extends StatelessWidget {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: bookData.map(
+                    children: bookData
+                        .map(
                           (e) => BookCard(
-                        coverUrl: e.coverUrl!,
-                        title: e.title!,
-                        ontap: () {
-
-                          Navigator.push(context,
-                              MaterialPageRoute(
-                                  builder: (context)=>BookDetails(book:e),
+                            coverUrl: e.coverUrl!,
+                            title: e.title!,
+                            ontap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BookDetails(book: e),
+                                ),
+                              );
+                            },
                           ),
-                          );
-
-                        },
-                      ),
-                    ).toList(),
+                        )
+                        .toList(),
                   ),
                 ),
                 SizedBox(height: 10),
-
                 SizedBox(height: 30),
                 Column(
                   children: [
@@ -260,34 +257,25 @@ class HomeWidget extends StatelessWidget {
                         children: [
                           Text(
                             "Your Interests",
-
                             style: TextStyle(
                               fontSize: 20,
                             ),
-
-
-
                           ),
                         ],
                       ),
                     ),
-
                     SizedBox(height: 30),
                     Column(
-                        children: bookData.map((e) => BookTile(
-                            title: e.title!,
-                            coverUrl: e.coverUrl!,
-                            author: e.author!,
-                            price: e.price!,
-                            rating: e.rating!,
-                            numberofRating: e.numberofRating!,
-                            ontap: () {
-
-                            })).toList()
-                    ),
-
-
-
+                        children: bookData
+                            .map((e) => BookTile(
+                                title: e.title!,
+                                coverUrl: e.coverUrl!,
+                                author: e.author!,
+                                price: e.price!,
+                                rating: e.rating!,
+                                numberofRating: e.numberofRating!,
+                                ontap: () {}))
+                            .toList()),
                   ],
                 ),
               ],
@@ -298,5 +286,110 @@ class HomeWidget extends StatelessWidget {
     );
   }
 }
-
-
+class addbook extends StatelessWidget {
+  const addbook({Key? key}) : super(key: key);
+@override
+Widget build(BuildContext context) {
+  TextEditingController controller = TextEditingController();
+  return Scaffold(
+    resizeToAvoidBottomInset: false,
+    body: SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            color: Colors.blueGrey,
+            height: 400,
+            // Add image or image field here
+          ),
+          SizedBox(height: 20),
+          Container(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              children: [
+                MyTextFormField(
+                  hintText: "Book title",
+                  icon: Icons.book,
+                  controller: controller,
+                ),
+                SizedBox(height: 20),
+                MyTextFormField(
+                  hintText: "Author",
+                  icon: Icons.account_circle,
+                  controller: controller,
+                ),
+                SizedBox(height: 20),
+                MyTextFormField(
+                  hintText: "Total page",
+                  icon: Icons.add_chart_sharp,
+                  controller: controller,
+                ),
+                SizedBox(height: 20),
+                MyTextFormField(
+                  hintText: "Language",
+                  icon: Icons.abc_outlined,
+                  controller: controller,
+                ),
+                SizedBox(height: 20),
+                MyTextFormField(
+                  hintText: "Price",
+                  icon: Icons.account_balance_wallet_rounded,
+                  controller: controller,
+                ),
+                SizedBox(height: 20),
+                MyTextFormField(
+                  hintText: "Audio length",
+                  icon: Icons.book,
+                  controller: controller,
+                ),
+                SizedBox(height: 10),
+                MultiLineTextField(
+                  hintText: "Description",
+                  controller: controller,
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            // Add your onTap functionality here
+                          },
+                          child: Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "Add",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
+                               
+                            
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+}
